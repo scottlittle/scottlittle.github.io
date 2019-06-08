@@ -8,5 +8,5 @@ Here you will find some info about my apps.
 
 | App name | Description |
 |-------|--------|
-| bqplot example | A look of what we can do with bqplot in widgets |
-| 3D graph | explore a graph in 3D |
+| [bqplot example](http://apps.scottlittle.org/voila/render/bqplot.ipynb) | A look of what we can do with bqplot in widgets |
+| [3D volume plot](http://apps.scottlittle.org/voila/render/ipyvolume.ipynb) | Explore a volume plot in 3D |
