@@ -250,10 +250,10 @@ table {
   text-align: center;
   color: $darkGray;
   border-collapse: collapse;
-  border: 1px solid $lightGray;
+  border: 1px solid lighten($darkGray,50%);
   tr {
     &:nth-child(even) {
-      background-color: $lightGray;
+      background-color: darken($lightGray, 20%);
     }
   }
   th, td {
