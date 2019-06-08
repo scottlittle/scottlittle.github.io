@@ -6,8 +6,7 @@ permalink: /apps/
 
 Here you will find some info about my apps.
 
-| Priority apples | Second priority | Third priority |
-|-------|--------|---------|
-| ambrosia | fuji | red delicious |
-| pink lady | jazz | macintosh |
-| honeycrisp | granny smith | fuji |
+| App name | Description |
+|-------|--------|
+| bqplot example | A look of what we can do with bqplot in widgets |
+| 3D graph | explore a graph in 3D |
