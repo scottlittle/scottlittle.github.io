@@ -250,22 +250,27 @@ table {
   text-align: center;
   color: $darkGray;
   border-collapse: collapse;
-  border: 1px solid lighten($darkGray,50%);
+  border: 1px solid darken($darkGray,50%);
   tr {
     &:nth-child(even) {
-      background-color: darken($lightGray, 20%);
+      background-color: darken($lightGray,10%);
+    }
+  }
+  tr {
+    &:nth-child(odd) {
+      background-color: darken($lightGray,1%);
     }
   }
   th, td {
     padding: (5px / 3) (5px / 2);
   }
   th {
-    background-color: $lightGray;
-    border: 1px solid $darkGray;
+    background-color: darken($lightGray,15%);
+    border: 1px solid lighten($darkGray,5%);
     border-bottom-color: $darkGray;
   }
   td {
-    border: 1px solid $lightGray;
+    border: 1px solid darken($lightGray,25%);
   }
 }
 
