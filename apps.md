@@ -14,3 +14,12 @@ Here you will find some info about my apps.
 | zebra stripes | get lines      |    False |
 
 
+
+
+|---
+| Default aligned | Left aligned | Center aligned | Right aligned
+|-|:-|:-:|-:
+| First body part | Second cell | Third cell | fourth cell
+| Second line |foo | **strong** | baz
+| Third line |quux | baz | bar
+|---
