@@ -8,6 +8,6 @@ Here you will find some info about my apps.
 
 | Priority apples | Second priority | Third priority |
 |-------|--------|---------|
-| ambrosia | gala | red delicious |
+| ambrosia | fuji | red delicious |
 | pink lady | jazz | macintosh |
 | honeycrisp | granny smith | fuji |
