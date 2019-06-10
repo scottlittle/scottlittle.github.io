@@ -4,7 +4,7 @@ title: Apps
 permalink: /apps/
 ---
 
-Here you will find some info about my apps.
+Click on a link to launch an app. Please allow the app at least a minute to load.  If an app does not load after some time, you may need to refresh the page to get it to load.
 
 | App | Description |
 |-------|--------|
