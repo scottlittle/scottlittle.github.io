@@ -9,5 +9,5 @@ Here you will find some info about my apps.
 | App | Description |
 |-------|--------|
 | [bqplot example](http://apps.scottlittle.org/voila/render/bqplot.ipynb) | A look of what we can do with bqplot in widgets |
-| [consumer knowledge graph](http://apps.scottlittle.org/voila/render/ipyvolume.ipynb) | Explore a consumer knowledge graph in 3d |
+| [consumer knowledge graph](http://apps.scottlittle.org/voila/render/consumer%20knowledge%20graph.ipynb) | Explore a consumer knowledge graph in 3d |
 | [lenders](http://apps.scottlittle.org/voila/render/lenders/lenders.ipynb) | Explore which lenders will give a loan |
