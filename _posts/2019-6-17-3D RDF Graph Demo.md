@@ -3,7 +3,7 @@ layout: post
 title: 3D RDF Graph Demo
 ---
 
-While learning `SPARQL` ([see previous post](http://scottlittle.org/Learning-SPARQL/)) I explored the tutorials of the [Brick Schema](brickschema.org) to get a handle on making queries on an RDF database (using the `RDFlib` python package).  One small complaint about `RDFlib` is that there is not an obvious way of outputting query results as a nice table.  I learned, however, that the output can be outputted to a JSON string and from there easily turned into a dictionary or pandas dataframe.  Additionally, you can programmatically replace the prefixes:
+While learning `SPARQL` ([see previous post](http://scottlittle.org/Learning-SPARQL/)) I explored the tutorials of the [Brick Schema](http://brickschema.org) to get a handle on making queries on an RDF database (using the `RDFlib` python package).  One small complaint about `RDFlib` is that there is not an obvious way of outputting query results as a nice table.  I learned, however, that the output can be outputted to a JSON string and from there easily turned into a dictionary or pandas dataframe.  Additionally, you can programmatically replace the prefixes:
 
 s|p|o
 ---|---|---
