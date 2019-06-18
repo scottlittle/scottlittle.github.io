@@ -17,4 +17,4 @@ This sort of output is easier to read than row by row output that the tutorials 
 
 ![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/brick-movie-480-2.gif)
 
-[You can explore this for yourself here.](http://scottlittle.org/brick-app-export)  This version is static in the sense that it is pre-rendered to decrease loading time.  A dynamic version that you could query, using SPARQL for instance, or select nodes with the mouse is possible if the application required it.
+[You can explore this for yourself here.](http://scottlittle.org/brick-app-export)  This version is static in the sense that it is pre-rendered to decrease loading time.  A dynamic version that you could query, using SPARQL for instance, or select nodes with the mouse is possible if the application required it.  Also, this version only works on desktop browsers, but a dynamic version would work with either desktop or mobile browsers.
