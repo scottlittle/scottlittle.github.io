@@ -26,3 +26,33 @@ Something that I wanted to explore here is something that I knew would overlap, 
 
 ![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/venn_gender_month.svg?sanitize=true)
 
+This is the groupby count for every combination:
+
+|    |   month | gender   |   trip_id |
+|----|---------|----------|-----------|
+|  0 |       1 | Female   |     50003 |
+|  1 |       1 | Male     |    221712 |
+|  2 |       2 | Female   |     60649 |
+|  3 |       2 | Male     |    245326 |
+|  4 |       3 | Female   |     92346 |
+|  5 |       3 | Male     |    345583 |
+|  6 |       4 | Female   |    144702 |
+|  7 |       4 | Male     |    476986 |
+|  8 |       5 | Female   |    216973 |
+|  9 |       5 | Male     |    652611 |
+| 10 |       6 | Female   |    319679 |
+| 11 |       6 | Male     |    858546 |
+| 12 |       7 | Female   |    355774 |
+| 13 |       7 | Male     |    923731 |
+| 14 |       8 | Female   |    356374 |
+| 15 |       8 | Male     |    948329 |
+| 16 |       9 | Female   |    314032 |
+| 17 |       9 | Male     |    875939 |
+| 18 |      10 | Female   |    244807 |
+| 19 |      10 | Male     |    752905 |
+| 20 |      11 | Female   |    145102 |
+| 21 |      11 | Male     |    498454 |
+| 22 |      12 | Female   |     78234 |
+| 23 |      12 | Male     |    316438 |
+
+We can use this to verify is our probabilistic data structures are doing the right thing.
