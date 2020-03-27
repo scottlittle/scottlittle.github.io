@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hashing in parallel
+title: Cardinality estimation in parallel
 ---
 
 Working on hashing in parallel.  I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far, the modifications have included serialization and adding the ability to get cardinality for intersections (HyperLogLog proper calculates cardinality for unions only).  I wanted to document my adventure here.  Here's an example for applying a HyperLogLog (hll) function to every new element.
