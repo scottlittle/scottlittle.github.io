@@ -26,9 +26,9 @@ Something that I wanted to explore here is something that I knew would overlap, 
 
 ![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/venn_gender_month.svg?sanitize=true)
 
-This is the groupby count for every combination:
+This is the groupby count for `trip_id` for every combination of the values in month and gender:
 
-|    |   month | gender   |   trip_id |
+|    |   month | gender   |     count |
 |----|---------|----------|-----------|
 |  0 |       1 | Female   |     50003 |
 |  1 |       1 | Male     |    221712 |
@@ -59,3 +59,10 @@ We can use this to verify is our probabilistic data structures are doing the rig
 
 ### Great! But there's a problem...
 When I first starting using and modifying the HyperLogLog Python package, I thought this was all that I would need to get cardinality estimates for combinations of variables.  At this point I didn't really care how the package worked, as long as it did.  To skip to the chase, what I found out is that HyperLogLog only estimates unions, not intersections.  My first instinct was to play with the code enough to tease the information out of the functions that I already had.  It turns out that one can do multiple cardinality estimates to do arbitrary combinations of unions and intersections, i.e. `(A U B) ∩ C`, using something called the inclusion-exclusion principle.  This is just a fancy way of saying that we can calculate intersections with only unions.  For example, if we wanted to get the intersection of `A ∩ B`, we'd "include" or add the individual cardinalities for A and B, then "exclude" or subtract the cardinality of the union `A U B`.  Needless to say this could get a little complicated to make a function for, and I did make one, but found out that this method is wildly inaccurate when the original cardinalities of the variables being compared are very different.  That is, the error of the inclusion-exclusion principle might be more than the result itself! Bummer.
+
+### Not to fear, MinHash is here!
+So, the way to solve this was to tack on another probabilistic data structure to solve for intersections.  I can get into the details of HyperLogLog later (or not, and just refer you to some papers or blogs), but we have to hash every unique element of the field that we are considering the cardinality for (in the above example, it's `trip_id`).  HyperLogLog is a fancy way of counting zeros to estimate cardinality.  The method uses "registers" to store the result of adding a new element.  The main engine is **elements that were added previously, will not be added again** because they will be hashed in exactly the same way and added to the same registers.  There are more elements than number of registers, so there will be collisions (mistakes), that's why HyperLogLog is an estimate and not an exact amount.  Unions of elements are as easy as taking the max of there registers.  We can serialize the result as a small string, saving space on the millions or billions of elements that we would otherwise have to keep track of.  At the record level, it doesn't make any sense to have hll data structures, but the magic comes in when you combine them and for, say, all of the unique values for each of your variables.
+
+So where does MinHash come into play? It turns out that our hll registers aren't good enough to easily create cardinality estimates for intersections, as mentioned above.  We need to add a the MinHash, or k number of `MinHash`es to each element.  I did this by creating a seperate number of registers, calculating an element's MinHash using a single hash function, then adding that value to the registers if it was low enough.  This is all just an elaborate way of saying that I "sampled" the variable of interest (in this case `trip_id`).  This sampling would look like this:
+
+![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/venn_gender_month_dots.svg?sanitize=true)
