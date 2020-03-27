@@ -24,5 +24,5 @@ Usually, we would like to count the number of distinct users who did x and also 
 
 Something that I wanted to explore here is something that I knew would overlap, so I picked `gender` and `month` as my pair of variables that I wanted to explore.
 
-![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/venn-gender-month.svg?sanitize=true)
+![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/venn_gender_month.svg?sanitize=true)
 
