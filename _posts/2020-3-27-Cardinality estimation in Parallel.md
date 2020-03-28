@@ -73,14 +73,18 @@ The result of this sampling is that we can find the proportion of the intersecti
 So, in short I modified an existing HyperLogLog Python package to accomplish this.  But first let me explain a bit of motivation (maybe I should have done this first?).  I noticed that in data science and machine learning, it's really helpful to calculate the correlation of multiple variables. In pandas you can do this with `df.corr()` and produce a beautiful grid matrix of all the different relationships of the variables.  But what if your data is mostly categorical, or what if you have big data, or both.  It's not as obvious how to see if two variables are related to each other.  One intuitive way we might do this is by something to think of our data like dna sequencing but instead of matching RNA, we're matching users.  But this breaks down when you consider that users don't necessarily have a particular order that they appear in for the variables to be correlated.  So we are limited to how many users are shared across two variables.  But variables aren't the ultimate unit.  Each variable has several values.  We can call this more fundamental unit a Key-Value Pair, or KVP.  The overlap of KVPs of one variable with the overlap of the KVPs of another variable are really what we want to get at to determine if the variables are related in any way.  If two KVPs have exactly the same number of users, then we can be pretty sure that there must be some sort of relation.  For example, we might find that users of a magazine variable correspond to the same users of a book variable.  Then upon further inpection, the value of the magazine variable is for science fiction and the value of the book variable is astronomy.  So, it makes sense why these two KVPs would have the same users.
 
 ### Dask stuff
-To do...
+To do...but let's summarize:
+1. Make function to apply HLL to each element in a series.
+2. Map function to each element in parallel.
+3. Reduce to combine HLLs over desired range (unioning these elements).
+4. Get cardinality from combined function.
 
 ### Some light reading
 #### My stuff
 * [Github: My take on HyperLogLog with intersections](https://github.com/scottlittle/hyperloglog)<br>
 
 #### Other people's stuff
-* [Original HyperLogLog Python package without intersections](https://github.com/scottlittle/hyperloglog)<br>
+* [Github: Original HyperLogLog Python package without intersections](https://github.com/scottlittle/hyperloglog)<br>
 * [Really great blog post on HyperLogLog and MinHash by NextRoll (AdRoll)](http://tech.nextroll.com/blog/data/2013/07/10/hll-minhash.html)
 * [AdRoll's complimentary paper to their blog post on combining HyperLogLog and MinHash](http://tech.nextroll.com/media/hllminhash.pdf)
 * [Recent paper on HyperMinHash and some state of the art techniques](https://arxiv.org/pdf/1710.08436.pdf)
