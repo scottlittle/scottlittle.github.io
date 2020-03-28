@@ -245,7 +245,9 @@ nav {
  * Tables
  */
 table {
+  display: block;
   overflow-x: auto;
+  white-space: nowrap;
   margin-bottom: 5px;
   width: 100%;
   text-align: center;
