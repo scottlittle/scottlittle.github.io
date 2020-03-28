@@ -242,7 +242,9 @@ nav {
 //
 
 .table-wrapper {
+  display: inline-block;
   overflow-x: auto;
+  white-space: nowrap;
   border: none;
 }
 
