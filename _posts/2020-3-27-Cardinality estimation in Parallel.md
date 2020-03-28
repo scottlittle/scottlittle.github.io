@@ -5,7 +5,7 @@ title: Cardinality estimation in parallel
 ### Introduction 🧮
 First, what is cardinality? It's counting the unique elements of a field.  In SQL, something like `SELECT DISTINCT field FROM table`.  You can definitely count unique elements this way but the trouble begins when you want to do quick analyses on big data.  If you want to explore relationships between two variables, it may involve multiple `GROUP BY`s and other operations for every pair of variables that you want to explore.  This is especially tedious and expensive if you were to explore every combination of fields.  I'm no expert in big O notation estimates, but this sounds like _O(n²)_ to me.  And _O(n²)_ is considering pairs, it could grow to _O(nᵐ)_ if you wanted to compare m columns.  With probalistic data structures like HyperLogLog and MinHash, we can compute this for every column, so then the cost is only around _O(n)_.  See the references listed at the bottom for in-depth discussions on probalistic data structures, the class of data structures that HyperLogLog and MinHash belong to.
 
-### What I'm doing 🔦
+### What I'm doing ⚙️
 I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far, the modifications have included serialization and adding the ability to get cardinality for intersections (HyperLogLog proper calculates cardinality for unions only).  I wanted to document my adventure here.  Here's an example for applying a HyperLogLog (hll) function to every new element. I'll come back to this graph in a bit.
 
 ![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/tree-reduce-graph.svg?sanitize=true)
@@ -87,7 +87,7 @@ The result of this sampling is that we can find the proportion of the intersecti
 ```J = ( A ∩ B ) / ( A ∪ B )```, where J is the Jaccard Index.  So, we can use this to get our intersection by 
 ```A ∩ B = J ( A ∪ B )```.  So we can get the intersection by calculating the Jaccard Index using MinHash and multiplying it by the union, calculted by the HyperLogLog, our old friend.
 
-### On to how I did it, or, wait?
+### On to how I did it, or, wait? ⏳
 So, in short I modified an existing HyperLogLog Python package to accomplish this.  But first let me explain a bit of motivation (maybe I should have done this first?).  I noticed that in data science and machine learning, it's really helpful to calculate the correlation of multiple variables. In pandas you can do this with `df.corr()` and produce a beautiful grid matrix of all the different relationships of the variables.  But what if your data is mostly categorical, or what if you have big data, or both.  It's not as obvious how to see if two variables are related to each other.  One intuitive way we might do this is by something to think of our data like dna sequencing but instead of matching RNA, we're matching users.  But this breaks down when you consider that users don't necessarily have a particular order that they appear in for the variables to be correlated.  So we are limited to how many users are shared across two variables.  But variables aren't the ultimate unit.  Each variable has several values.  We can call this more fundamental unit a Key-Value Pair, or KVP.  The overlap of KVPs of one variable with the overlap of the KVPs of another variable are really what we want to get at to determine if the variables are related in any way.  If two KVPs have exactly the same number of users, then we can be pretty sure that there must be some sort of relation.  For example, we might find that users of a magazine variable correspond to the same users of a book variable.  Then upon further inpection, the value of the magazine variable is for science fiction and the value of the book variable is astronomy.  So, it makes sense why these two KVPs would have the same users.
 
 ### Dask stuff
@@ -108,7 +108,7 @@ We want to further this process to use with multiple combinations of variables a
 #### Parallelized estimate results
 The moment you've been waiting for...
 
-### Some light reading
+### Some light reading 📚
 #### My stuff
 * [Github: My take on HyperLogLog with intersections](https://github.com/scottlittle/hyperloglog)<br>
 
