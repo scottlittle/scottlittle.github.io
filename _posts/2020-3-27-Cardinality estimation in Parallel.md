@@ -74,10 +74,21 @@ So, in short I modified an existing HyperLogLog Python package to accomplish thi
 
 ### Dask stuff
 To do...but let's summarize:
+
+#### Simple function
 1. Make function to apply HLL to each element in a series.
 2. Map function to each element in parallel.
 3. Reduce to combine HLLs over desired range (unioning these elements).
 4. Get cardinality from combined function.
+
+#### Group by functionality
+We want to further this process to use with multiple combinations of variables and values, but this time we terminate the functionality with serialization of the HLL object so that we can instantiate it on the fly, that is, when we want to do analysis or quick computation, like in a dashboard.
+1. Make function that encapsulates previous "simple function" and then applies it to every variable and value of interest.
+2. Terminate with serialization of HLL object.
+3. Re-instantiate and run analysis like intersection.
+
+#### Parallelized estimate results
+The moment you've been waiting for...
 
 ### Some light reading
 #### My stuff
