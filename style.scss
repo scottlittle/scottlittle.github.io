@@ -241,12 +241,16 @@ nav {
 // .main
 //
 
+.table-wrapper {
+  overflow-x: scroll;
+}
+
 /**
  * Tables
  */
 table {
   display: block;
-  overflow: scroll;
+  overflow: auto;
   white-space: nowrap;
   margin-bottom: 5px;
   width: 100%;
