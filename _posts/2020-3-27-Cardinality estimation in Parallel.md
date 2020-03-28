@@ -10,7 +10,7 @@ I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far,
 
 ![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/tree-reduce-graph.svg?sanitize=true)
 
-```python
+~~~python
 def get_tasks( res ):
     L = res.to_delayed()
     while len(L) > 1: # tree reduction
@@ -20,7 +20,7 @@ def get_tasks( res ):
             new_L.append( lazy )
         L = new_L                       # swap old list for new
     return L
-```
+~~~
 
 ### Exploring the data
 Usually, we would like to count the number of distinct users who did x and also did y.  I looked for a fairly large dataset (a few GB) that was open and interesting and found the Chicago Divvy Bike Share dataset.  Instead of distinct users, this dataset's primary key is `trip_id` (although the raw version is a bit messed up and needs to be deduped).  
