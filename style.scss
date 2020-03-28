@@ -246,7 +246,7 @@ nav {
  */
 table {
   display: block;
-  overflow-x: auto;
+  overflow: scroll;
   white-space: nowrap;
   margin-bottom: 5px;
   width: 100%;
