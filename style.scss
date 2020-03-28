@@ -242,15 +242,14 @@ nav {
 //
 
 .table-wrapper {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 /**
  * Tables
  */
 table {
-  overflow: auto;
-  white-space: nowrap;
+  overflow-x: auto;
   margin-bottom: 5px;
   width: 100%;
   text-align: center;
