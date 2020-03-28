@@ -76,4 +76,6 @@ So, in short I modified an existing HyperLogLog Python package to accomplish thi
 To do...
 
 ### References
-![My take on HyperLogLog with intersections](https://github.com/scottlittle/hyperloglog)
+[My take on HyperLogLog with intersections](https://github.com/scottlittle/hyperloglog)
+[Original HyperLogLog Python package without intersections](https://github.com/scottlittle/hyperloglog)
+[AdRoll's take on combining HyperLogLog and MinHash](http://tech.nextroll.com/media/hllminhash.pdf)
