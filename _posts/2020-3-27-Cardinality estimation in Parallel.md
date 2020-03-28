@@ -28,7 +28,6 @@ Something that I wanted to explore here is something that I knew would overlap, 
 
 This is the groupby count for `trip_id` for every combination of the values in month and gender:
 
-<div class="table-wrapper" markdown="block">
 |    |   month | gender   |     count |
 |----|---------|----------|-----------|
 |  0 |       1 | Female   |     50003 |
@@ -55,7 +54,6 @@ This is the groupby count for `trip_id` for every combination of the values in m
 | 21 |      11 | Male     |    498454 |
 | 22 |      12 | Female   |     78234 |
 | 23 |      12 | Male     |    316438 |
-</div>
 
 We can use this to verify is our probabilistic data structures are doing the right thing.
 
