@@ -108,32 +108,32 @@ We want to further this process to use with multiple combinations of variables a
 #### Parallelized estimate results
 The moment you've been waiting for...
 
-|    |   month | gender   |   trip_id |
-|----|---------|----------|-----------|
-|  0 |       1 | Female   |     50003 |
-|  1 |       1 | Male     |    221712 |
-|  2 |       2 | Female   |     60649 |
-|  3 |       2 | Male     |    245326 |
-|  4 |       3 | Female   |     92346 |
-|  5 |       3 | Male     |    345583 |
-|  6 |       4 | Female   |    144702 |
-|  7 |       4 | Male     |    476986 |
-|  8 |       5 | Female   |    216973 |
-|  9 |       5 | Male     |    652611 |
-| 10 |       6 | Female   |    319679 |
-| 11 |       6 | Male     |    858546 |
-| 12 |       7 | Female   |    355774 |
-| 13 |       7 | Male     |    923731 |
-| 14 |       8 | Female   |    356374 |
-| 15 |       8 | Male     |    948329 |
-| 16 |       9 | Female   |    314032 |
-| 17 |       9 | Male     |    875939 |
-| 18 |      10 | Female   |    244807 |
-| 19 |      10 | Male     |    752905 |
-| 20 |      11 | Female   |    145102 |
-| 21 |      11 | Male     |    498454 |
-| 22 |      12 | Female   |     78234 |
-| 23 |      12 | Male     |    316438 |
+|    |   month | gender   |   count |
+|----|---------|----------|---------|
+|  0 |       1 | Female   |   46629 |
+|  1 |       1 | Male     |  226171 |
+|  2 |       2 | Female   |   60181 |
+|  3 |       2 | Male     |  254040 |
+|  4 |       3 | Female   |   87928 |
+|  5 |       3 | Male     |  367335 |
+|  6 |       4 | Female   |  155890 |
+|  7 |       4 | Male     |  416652 |
+|  8 |       5 | Female   |  199395 |
+|  9 |       5 | Male     |  686591 |
+| 10 |       6 | Female   |  301221 |
+| 11 |       6 | Male     |  852693 |
+| 12 |       7 | Female   |  375716 |
+| 13 |       7 | Male     |  877645 |
+| 14 |       8 | Female   |  339444 |
+| 15 |       8 | Male     |  902579 |
+| 16 |       9 | Female   |  301065 |
+| 17 |       9 | Male     |  900219 |
+| 18 |      10 | Female   |  250688 |
+| 19 |      10 | Male     |  731281 |
+| 20 |      11 | Female   |  154876 |
+| 21 |      11 | Male     |  473938 |
+| 22 |      12 | Female   |   74243 |
+| 23 |      12 | Male     |  306675 |
 
 Not too bad, not too bad. Compare them to the `GROUP BY` above.
 
