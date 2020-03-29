@@ -135,7 +135,7 @@ The moment you've been waiting for...
 | 22 |      12 | Female   |           74243 |         78234 |       5.10136  |
 | 23 |      12 | Male     |          306675 |        316438 |       3.08528  |
 
-Not too bad, not too bad. Could be worse. ¯\_(ツ)_/¯
+Not too bad, not too bad. Could be worse. `¯\_(ツ)_/¯`
 
 ### Some light reading 📚
 #### My stuff
