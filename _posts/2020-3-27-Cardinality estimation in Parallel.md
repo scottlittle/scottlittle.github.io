@@ -139,7 +139,7 @@ The moment you've been waiting for...
 
 </div>
 
-Not too bad, not too bad. Could be worse. `¯\_(ツ)_/¯` 
+Not too bad, not too bad. Could be worse. `¯\_(ツ)_/¯` <br>
 At least it's better than the intersections by the inclusion-exclusion rule:
 
 <div class="table-wrapper" markdown="block">
