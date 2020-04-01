@@ -24,7 +24,7 @@ def get_tasks( res ):
 ~~~
 
 ### Exploring the data 📊
-Usually, we would like to count the number of distinct users who did x and also did y.  I looked for a fairly large dataset (a few GB) that was open and interesting and found the Chicago Divvy Bike Share dataset.  Instead of distinct users, this dataset's primary key is `trip_id` (although the raw version is a bit messed up and needs to be deduped).  
+Usually, we would like to count the number of distinct users who did x and also did y.  I looked for a fairly large dataset (a few GB) that was open and interesting and found the Chicago Divvy Bike Share dataset.  Instead of distinct users, this dataset's primary key is `trip_id`.  The data is 9495235 rows long and has 9495188 unique `trip_id`s (there are a small number of dupes present).
 
 <div class="table-wrapper" markdown="block">
   
@@ -112,30 +112,30 @@ The moment you've been waiting for...
 
 |    |   month | gender   |   card estimate |   card actual | percent diff   |
 |----|---------|----------|-----------------|---------------|----------------|
-|  0 |       1 | Female   |           47514 |         50003 | 4.98%          |
-|  1 |       1 | Male     |          219747 |        221712 | 0.89%          |
-|  2 |       2 | Female   |           62544 |         60649 | -3.12%         |
-|  3 |       2 | Male     |          251242 |        245326 | -2.41%         |
-|  4 |       3 | Female   |           93882 |         92346 | -1.66%         |
-|  5 |       3 | Male     |          357147 |        345583 | -3.35%         |
-|  6 |       4 | Female   |          143047 |        144702 | 1.14%          |
-|  7 |       4 | Male     |          458490 |        476986 | 3.88%          |
-|  8 |       5 | Female   |          195983 |        216973 | 9.67%          |
-|  9 |       5 | Male     |          678624 |        652611 | -3.99%         |
-| 10 |       6 | Female   |          315750 |        319679 | 1.23%          |
-| 11 |       6 | Male     |          855435 |        858546 | 0.36%          |
-| 12 |       7 | Female   |          370738 |        355774 | -4.21%         |
-| 13 |       7 | Male     |          903087 |        923731 | 2.23%          |
-| 14 |       8 | Female   |          355070 |        356374 | 0.37%          |
-| 15 |       8 | Male     |          953974 |        948329 | -0.6%          |
-| 16 |       9 | Female   |          313096 |        314032 | 0.3%           |
-| 17 |       9 | Male     |          881420 |        875939 | -0.63%         |
-| 18 |      10 | Female   |          246602 |        244807 | -0.73%         |
-| 19 |      10 | Male     |          758211 |        752905 | -0.7%          |
-| 20 |      11 | Female   |          139889 |        145102 | 3.59%          |
-| 21 |      11 | Male     |          472070 |        498454 | 5.29%          |
-| 22 |      12 | Female   |           71838 |         78234 | 8.18%          |
-| 23 |      12 | Male     |          327853 |        316438 | -3.61%         |
+|  0 |       1 | Female   |           51188 |         50003 | -2.37%         |
+|  1 |       1 | Male     |          222455 |        221712 | -0.34%         |
+|  2 |       2 | Female   |           59210 |         60649 | 2.37%          |
+|  3 |       2 | Male     |          246677 |        245326 | -0.55%         |
+|  4 |       3 | Female   |           93464 |         92346 | -1.21%         |
+|  5 |       3 | Male     |          340408 |        345583 | 1.5%           |
+|  6 |       4 | Female   |          141403 |        144702 | 2.28%          |
+|  7 |       4 | Male     |          476394 |        476986 | 0.12%          |
+|  8 |       5 | Female   |          212724 |        216973 | 1.96%          |
+|  9 |       5 | Male     |          668272 |        652611 | -2.4%          |
+| 10 |       6 | Female   |          321649 |        319679 | -0.62%         |
+| 11 |       6 | Male     |          871597 |        858546 | -1.52%         |
+| 12 |       7 | Female   |          360552 |        355774 | -1.34%         |
+| 13 |       7 | Male     |          930521 |        923731 | -0.74%         |
+| 14 |       8 | Female   |          356013 |        356374 | 0.1%           |
+| 15 |       8 | Male     |          952413 |        948329 | -0.43%         |
+| 16 |       9 | Female   |          313715 |        314032 | 0.1%           |
+| 17 |       9 | Male     |          879395 |        875939 | -0.39%         |
+| 18 |      10 | Female   |          246669 |        244807 | -0.76%         |
+| 19 |      10 | Male     |          759524 |        752905 | -0.88%         |
+| 20 |      11 | Female   |          141407 |        145102 | 2.55%          |
+| 21 |      11 | Male     |          509001 |        498454 | -2.12%         |
+| 22 |      12 | Female   |           76642 |         78234 | 2.03%          |
+| 23 |      12 | Male     |          321145 |        316438 | -1.49%         |
 
 </div>
 
