@@ -151,7 +151,7 @@ def groupby_approx_counts( ddf, x, countby='trip_id' ):
     return x, uniques, serial_objs
 ~~~~
 
-#### Parallelized estimate results
+### Parallelized estimate results
 The moment you've been waiting for...
 
 <div class="table-wrapper" markdown="block">
