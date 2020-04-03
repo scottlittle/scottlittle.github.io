@@ -86,7 +86,7 @@ Let's summarize and expand each step here. I'm just going to put the heart of th
 
 Map and reduce code used to generate the dask task graph:
 ~~~python
-# map steps
+############ map steps #############
 
 def hll_count_series(series):
     hll = hyperloglog.HyperLogLog(0.01)  # accept 1% counting error
@@ -97,12 +97,13 @@ res = ddf['trip_id'].map_partitions(hll_count_series, meta=('this_result','f8'))
 
 res = res.to_delayed()
 
-# reduce steps
+########## reduce steps ############
 
 def hll_reduce(x, y):
     x.update(y)
     return x
 
+# make tree reduction tasks
 L = res
 while len(L) > 1:
     new_L = []
@@ -123,7 +124,7 @@ We want to further this process to use with multiple combinations of variables a
 2. Terminate with serialization of HLL object.
 3. Re-instantiate and run analysis like intersection.
 
-Again, here's the code-in-brief used for these steps:
+Here's the code-in-brief used for these steps:
 
 ~~~python
 def hll_serialize(x):
