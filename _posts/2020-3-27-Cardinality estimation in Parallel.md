@@ -6,22 +6,7 @@ title: Cardinality estimation in parallel
 First, what is cardinality? It's counting the unique elements of a field.  In SQL, something like `SELECT DISTINCT field FROM table`.  You can definitely count unique elements this way but the trouble begins when you want to do quick analyses on big data.  If you want to explore relationships between two variables, it may involve multiple `GROUP BY`s and other operations for every pair of variables that you want to explore.  This is especially tedious and expensive if you were to explore every combination of fields.  I'm no expert in big O notation estimates, but this sounds like _O(n²)_ to me.  And _O(n²)_ is considering pairs, it could grow to _O(nᵐ)_ if you wanted to compare m columns.  With probalistic data structures like HyperLogLog and MinHash, we can compute this for every column, so then the cost is only around _O(n)_.  See the references listed at the bottom for in-depth discussions on probalistic data structures, the class of data structures that HyperLogLog and MinHash belong to.
 
 ### What I'm doing ⚙️
-I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far, the modifications have included serialization and adding the ability to get cardinality for intersections (HyperLogLog proper calculates cardinality for unions only).  I wanted to document my adventure here.  Here's an example for applying a HyperLogLog (hll) function to every new element. I'll come back to this graph in a bit.
-
-![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/tree-reduce-graph.svg?sanitize=true)
-
-Code used to generate the dask task graph above:
-~~~python
-def get_tasks( res ):
-    L = res.to_delayed()
-    while len(L) > 1: # tree reduction
-        new_L = []
-        for i in range(0, len(L), 2):
-            lazy = dask.delayed( hll_reduce )(L[i-1], L[i])  # add neighbors  
-            new_L.append( lazy )
-        L = new_L                       # swap old list for new
-    return L
-~~~
+I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far, the modifications have included serialization and adding the ability to get cardinality for intersections (HyperLogLog proper calculates cardinality for unions only).  I wanted to document my adventure here.  
 
 ### Exploring the data 📊
 Usually, we would like to count the number of distinct users who did x and also did y.  I looked for a fairly large dataset (a few GB) that was open and interesting and found the Chicago Divvy Bike Share dataset.  Instead of distinct users, this dataset's primary key is `trip_id`.  The data is 9495235 rows long and has 9495188 unique `trip_id`s (there are a small number of dupes present).
@@ -91,19 +76,80 @@ The result of this sampling is that we can find the proportion of the intersecti
 So, in short I modified an existing HyperLogLog Python package to accomplish this.  But first let me explain a bit of motivation (maybe I should have done this first?).  I noticed that in data science and machine learning, it's really helpful to calculate the correlation of multiple variables. In pandas you can do this with `df.corr()` and produce a beautiful grid matrix of all the different relationships of the variables.  But what if your data is mostly categorical, or what if you have big data, or both.  It's not as obvious how to see if two variables are related to each other.  One intuitive way we might do this is by something to think of our data like dna sequencing but instead of matching RNA, we're matching users.  But this breaks down when you consider that users don't necessarily have a particular order that they appear in for the variables to be correlated.  So we are limited to how many users are shared across two variables.  But variables aren't the ultimate unit.  Each variable has several values.  We can call this more fundamental unit a Key-Value Pair, or KVP.  The overlap of KVPs of one variable with the overlap of the KVPs of another variable are really what we want to get at to determine if the variables are related in any way.  If two KVPs have exactly the same number of users, then we can be pretty sure that there must be some sort of relation.  For example, we might find that users of a magazine variable correspond to the same users of a book variable.  Then upon further inpection, the value of the magazine variable is for science fiction and the value of the book variable is astronomy.  So, it makes sense why these two KVPs would have the same users.
 
 ### Dask stuff
-To do...but let's summarize:
+Let's summarize and expand each step here. I'm just going to put the heart of the code here. [See this for the full Jupyter Notebook.](https://github.com/scottlittle/hyperloglog/blob/master/examples/hll%20intersection%20with%20dask.ipynb)
 
-#### Simple function
+#### Map reduce functions
 1. Make function to apply HLL to each element in a series.
 2. Map function to each element in parallel.
 3. Reduce to combine HLLs over desired range (unioning these elements).
-4. Get cardinality from combined function.
+4. (Optional) Get cardinality from combined function.
+
+Map and reduce code used to generate the dask task graph:
+~~~python
+# map steps
+
+def hll_count_series(series):
+    hll = hyperloglog.HyperLogLog(0.01)  # accept 1% counting error
+    series.map( hll.add );
+    return hll
+
+res = ddf['trip_id'].map_partitions(hll_count_series, meta=('this_result','f8'))
+
+res = res.to_delayed()
+
+# reduce steps
+
+def hll_reduce(x, y):
+    x.update(y)
+    return x
+
+L = res
+while len(L) > 1:
+    new_L = []
+    for i in range(0, len(L), 2):
+        lazy = dask.delayed(hll_reduce)(L[i-1], L[i])  # add neighbors  
+        new_L.append(lazy)
+    L = new_L                       # swap old list for new
+
+~~~
+Here's what this looks like as a dask task graph:
+
+![](https://raw.githubusercontent.com/scottlittle/scottlittle.github.io/master/images/tree-reduce-graph.svg?sanitize=true)
+
 
 #### Group by functionality
 We want to further this process to use with multiple combinations of variables and values, but this time we terminate the functionality with serialization of the HLL object so that we can instantiate it on the fly, that is, when we want to do analysis or quick computation, like in a dashboard.
 1. Make function that encapsulates previous "simple function" and then applies it to every variable and value of interest.
 2. Terminate with serialization of HLL object.
 3. Re-instantiate and run analysis like intersection.
+
+Again, here's the code-in-brief used for these steps:
+
+~~~python
+def hll_serialize(x):
+    return x.serialize()
+
+def get_serialized_hll( series ):
+    '''returns serialized hll from dask series as dask delayed object'''
+    res = series.map_partitions( hll_count_series , meta=('this_result','f8'))
+    L = get_tasks(res)
+    S = dask.delayed( hll_serialize )(L[0])
+    return S
+    
+def groupby_approx_counts( ddf, x, countby='trip_id' ):
+    '''
+    input: takes in dask dataframe and item to group by, as well as item to count by
+    output: tuple containing: list of unique values in the item to group by, a list of dask delayed objects with the serialized hll object
+    '''
+    results = []
+    uniques = ddf[x].unique().compute().tolist()
+    for value in uniques:
+        results.append( get_serialized_hll( ddf[ ddf[x]==value ][countby] ) )
+        
+    serial_objs = dask.compute( *results )
+    
+    return x, uniques, serial_objs
+~~~~
 
 #### Parallelized estimate results
 The moment you've been waiting for...
