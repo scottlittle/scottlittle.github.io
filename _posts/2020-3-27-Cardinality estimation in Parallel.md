@@ -219,6 +219,9 @@ At least it's better than the intersections by the inclusion-exclusion rule:
 
 </div>
 
+### Conclusion
+In conclusion, I made a thing. Check out the github project, post a comment here, or an issue on the github page.
+
 ### Some light reading 📚
 #### My stuff
 * [Github: My take on HyperLogLog with intersections](https://github.com/scottlittle/hyperloglog)<br>
