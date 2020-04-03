@@ -9,7 +9,7 @@ First, what is cardinality? It's counting the unique elements of a field.  In SQ
 I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far, the modifications have included serialization and adding the ability to get cardinality for intersections (HyperLogLog proper calculates cardinality for unions only).  I wanted to document my adventure here.  
 
 ### Exploring the data 📊
-Usually, we would like to count the number of distinct users who did x and also did y.  I looked for a fairly large dataset (a few GB) that was open and interesting and found the Chicago Divvy Bike Share dataset.  Instead of distinct users, this dataset's primary key is `trip_id`.  The data is 9495235 rows long and has 9495188 unique `trip_id`s (there are a small number of dupes present).
+Usually, we would like to count the number of distinct users who did x and also did y.  I looked for a fairly large dataset (a few GB) that was open and interesting and found the Chicago Divvy Bike Share dataset.  Instead of distinct users, this dataset's primary key is `trip_id`.  The data is 9495235 rows long and has 9495188 unique `trip_id`s (there are a small number of dupes present).  I broke this into 128 MiB chunks, which makes 16 partitions.  Partitions are what makes dask parallel. And in this case, if you had 16 cores, you could get a 16X speedup.  Plus, dask is out-of-core, meaning that you can process datasets larger than your ram.  Dask recommends just using pandas if your dataset fits in memory.
 
 <div class="table-wrapper" markdown="block">
   
