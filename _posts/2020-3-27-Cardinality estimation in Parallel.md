@@ -225,6 +225,8 @@ At least it's better than the intersections by the inclusion-exclusion rule:
 </div>
 
 ### Happy App-y
+To demostrate the power of this data structure, I made a ipywidgets app that can explore the cardinalities of different intersections.  The setup should be intuitive here, but behind the scenes, the app is calculating the unions between values of the same fields and the intersections of all of these results.  What you get is a nearly realtime exploratory tool of the data.  To do this with exact counts, you would need to do groupby sums on different cuts of the data, which would take a lot longer.
+
 ![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/Screen%20Shot%202020-04-09%20at%204.06.11%20PM.png?raw=true)
 
 ### Conclusion
