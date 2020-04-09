@@ -75,7 +75,7 @@ The result of this sampling is that we can find the proportion of the intersecti
 ### On to how I did it, or, wait? ⏳
 So, in short I modified an existing HyperLogLog Python package to accomplish this.  But first let me explain a bit of motivation (maybe I should have done this first?).  I noticed that in data science and machine learning, it's really helpful to calculate the correlation of multiple variables. In pandas you can do this with `df.corr()` and produce a beautiful grid matrix of all the different relationships of the variables.  But what if your data is mostly categorical, or what if you have big data, or both.  It's not as obvious how to see if two variables are related to each other.  One intuitive way we might do this is by something to think of our data like DNA matching, but instead of DNA, we're matching users.  
 
-![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/CBP_chemist_reads_a_DNA_profile.jpg)
+![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/CBP_chemist_reads_a_DNA_profile.jpg?raw=true)
 
 But this breaks down when you consider that users don't necessarily have a particular order that they appear in for the variables to be correlated.  So we are limited to how many users are shared across two variables.  But variables aren't the ultimate unit.  Each variable has several values.  We can call this more fundamental unit a Key-Value Pair, or KVP.  The overlap of KVPs of one variable with the overlap of the KVPs of another variable are really what we want to get at to determine if the variables are related in any way.  If two KVPs have exactly the same number of users, then we can be pretty sure that there must be some sort of relation.  For example, we might find that users of a magazine variable correspond to the same users of a book variable.  Then upon further inpection, the value of the magazine variable is for science fiction and the value of the book variable is astronomy.  So, it makes sense why these two KVPs would have the same users.
 
@@ -223,6 +223,9 @@ At least it's better than the intersections by the inclusion-exclusion rule:
 | 23 |      12 | Male     |     314132 |        316438 | 0.73%       |
 
 </div>
+
+### Happy App-y
+![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/Screen%20Shot%202020-04-09%20at%204.06.11%20PM.png?raw=true)
 
 ### Conclusion
 In conclusion, I made a thing. Check out the github project, post a comment here, or an issue on the github page.
