@@ -238,7 +238,15 @@ $$
 with
 
 $$
-H(X) = -\sum_{X,Y}
+H(X) = -\sum_{X} P_X \log{ \frac{P_X}{P_{X}} }
+$$
+
+$$
+H(X \mid Y) = \sum_{X,Y} P_{XY} \log{ \frac{P_Y}{P_{X}} }
+$$
+
+$$
+H(X \mid Y) = \frac{1}{N} \sum_{X,Y} N_{XY} \log{ \frac{N_Y}{N_{XY}} }
 $$
 
 ### Conclusion
