@@ -5,10 +5,6 @@ title: Cardinality estimation in parallel
 ### Introduction 🧮
 First, what is cardinality? It's counting the unique elements of a field.  In SQL, something like `SELECT DISTINCT field FROM table`.  You can definitely count unique elements this way but the trouble begins when you want to do quick analyses on big data.  If you want to explore relationships between two variables, it may involve multiple `GROUP BY`s and other operations for every pair of variables that you want to explore.  This is especially tedious and expensive if you were to explore every combination of fields.  I'm no expert in big O notation estimates, but this sounds like _O(n²)_ to me.  And _O(n²)_ is considering pairs, it could grow to _O(nᵐ)_ if you wanted to compare m columns.  With probalistic data structures like HyperLogLog and MinHash, we can compute this for every column, so then the cost is only around _O(n)_.  See the references listed at the bottom for in-depth discussions on probalistic data structures, the class of data structures that HyperLogLog and MinHash belong to.
 
-$$
-P(Y \mid do(X))
-$$
-
 ### What I'm doing ⚙️
 I'm modifying a Python implementation of HyperLogLog to work with Dask.  So far, the modifications have included serialization and adding the ability to get cardinality for intersections (HyperLogLog proper calculates cardinality for unions only).  I wanted to document my adventure here.  
 
@@ -232,6 +228,18 @@ At least it's better than the intersections by the inclusion-exclusion rule:
 To demostrate the power of this data structure, I made a ipywidgets app that can explore the cardinalities of different intersections.  The setup should be intuitive here, but behind the scenes, the app is calculating the unions between values of the same fields and the intersections of all of these results.  What you get is a nearly realtime exploratory tool of the data.  To do this with exact counts, you would need to do groupby sums on different cuts of the data, which would take a lot longer.
 
 ![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/Screen%20Shot%202020-04-09%20at%204.06.11%20PM.png?raw=true)
+
+### Summary statistics
+
+$$ 
+U( X \mid Y ) = \frac{ H(X) - H( X,Y ) }{H(X)} 
+$$
+
+with
+
+$$
+H(X) = -\sum_{X,Y}
+$$
 
 ### Conclusion
 In conclusion, I made a thing. Check out the github project, post a comment here, or an issue on the github page.
