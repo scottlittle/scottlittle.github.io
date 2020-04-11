@@ -6,14 +6,7 @@ title: Cardinality estimation in parallel
 First, what is cardinality? It's counting the unique elements of a field.  In SQL, something like `SELECT DISTINCT field FROM table`.  You can definitely count unique elements this way but the trouble begins when you want to do quick analyses on big data.  If you want to explore relationships between two variables, it may involve multiple `GROUP BY`s and other operations for every pair of variables that you want to explore.  This is especially tedious and expensive if you were to explore every combination of fields.  I'm no expert in big O notation estimates, but this sounds like _O(n²)_ to me.  And _O(n²)_ is considering pairs, it could grow to _O(nᵐ)_ if you wanted to compare m columns.  With probalistic data structures like HyperLogLog and MinHash, we can compute this for every column, so then the cost is only around _O(n)_.  See the references listed at the bottom for in-depth discussions on probalistic data structures, the class of data structures that HyperLogLog and MinHash belong to.
 
 $$
-\begin{align}
-P(Y \mid do(X)) &= \sum_U P(Y \mid X, U=u) P(U=u) \tag{iff all back doors are shut} \\
-&= \mathbb E_{u\sim U}[P(Y \mid X, U=u)] \\
-P(Y \mid X, U=u) &=  \frac{\mathbb E_{(x, y)\sim X, Y, U=u} [(x -\mu_x)(y-\mu_y)]}{\sigma_x} \tag{correlation}  \\
-\\
-Y &= aX + bU + c \tag{assume linear relationships} \\
-a&= (Y-bU + c)X^{-1} \\
-\end{align}
+P(Y \mid do(X)) &= \sum_U P(Y \mid X, U=u) P(U=u)
 $$
 
 ### What I'm doing ⚙️
