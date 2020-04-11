@@ -245,6 +245,8 @@ $$
 H(X \mid Y) = \sum_{X,Y} P_{XY} \log{ \frac{P_Y}{P_{X}} }
 $$
 
+or with N:
+
 $$
 H(X \mid Y) = \frac{1}{N} \sum_{X,Y} N_{XY} \log{ \frac{N_Y}{N_{XY}} }
 $$
