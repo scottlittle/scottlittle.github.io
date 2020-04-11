@@ -229,6 +229,23 @@ To demostrate the power of this data structure, I made a ipywidgets app that can
 
 ![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/Screen%20Shot%202020-04-09%20at%204.06.11%20PM.png?raw=true)
 
+$$
+\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+$$
+
 ### Conclusion
 In conclusion, I made a thing. Check out the github project, post a comment here, or an issue on the github page.
 
