@@ -251,6 +251,11 @@ $$
 H(X \mid Y) = \frac{1}{N} \sum_{X,Y} N_{XY} \log{ \frac{N_Y}{N_{XY}} }
 $$
 
+Using this on our data above, we get <br>
+U('gender|month') = 0.003743838241534698 for gender given a month, and <br>
+U('month|gender') = 0.000888040051292706 for month given a gender. <br>
+So, neither of these are highly correlated. But we do get more information about gender from a given month, than month given a gender (it's 4.2 times more).
+
 ### Conclusion
 In conclusion, I made a thing. Check out the github project, post a comment here, or an issue on the github page.
 
