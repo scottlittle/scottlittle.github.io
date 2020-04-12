@@ -230,9 +230,12 @@ To demostrate the power of this data structure, I made a ipywidgets app that can
 ![](https://github.com/scottlittle/scottlittle.github.io/blob/master/images/Screen%20Shot%202020-04-09%20at%204.06.11%20PM.png?raw=true)
 
 ### Summary statistics
+Another really powerful advantage of this method of computing cardinality is quickly getting summary statistics about our data.  This was actually my first motativation of implementing everything here.  I wanted to get the "correlation" between two categorical variables on a large dataset, but this took 4 days to compute the the groupby counts for every pair of fields in the dataset.  This method, in opposition, would take minutes.  [Here's a case](https://towardsdatascience.com/the-search-for-categorical-correlation-a1cf7f1888c9) where this statistic was calculated for a very small dataset and was able to find highly correlated coefficients.
 
-$$ 
-U( X \mid Y ) = \frac{ H(X) - H( X,Y ) }{H(X)} 
+Theil's U (uncertainty coefficient):
+
+$$
+U(X \mid Y) = \frac{H(X) - H(X \mid Y)}{H(X)}
 $$
 
 with
