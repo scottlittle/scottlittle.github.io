@@ -241,7 +241,7 @@ $$
 with
 
 $$
-H(X) = -\sum_{X} P_X \log{ \frac{P_X}{P_{X}} }
+H(X) = -\sum_{X} P_X \log{ P_{X} }
 $$
 
 $$
